@@ -1,0 +1,47 @@
+<template>
+    <main>
+        <div V-if= 'showProduct'>
+                <h2 v-text ="product.title"></h2>
+                <p v-text ="product.description"></p>
+                <p> Location: {{product.location}}</p>
+                <p> Spaces: <v-on:click>{{cartItemCount}} </p>
+                <p> Price: {{ product.price }}</p>
+                <!-- This button would display when 'Add to cart is true'-->
+                <button class="btn btn-secondary" v-on:click='addToCart' v-if='canAddToCart'> Add to Cart</button>
+                                    
+                <!-- This button will be disabled otherwise-->
+                <button disabled ='disabled' v-else>Add to cart</button>
+        </div>
+        <div V-else>
+            <p>We have run out of spaces, Please check later.</p>
+        </div>
+     </main>
+</template>
+
+<script>
+export default {
+    name: "LessonList",
+    data() {
+        return {
+            products: [
+                {   id: 001,
+                    title: "Math",
+                    description: "Mathematics is widely known and used in our everyday lives, we would put you through and help you understand it better.",
+                    price: 2000,
+                    location: "Valletta",
+                    availableInventory: 5
+                    }
+            ]
+        }
+    },
+    methods: {
+         addToCart: function(){
+                    console.log('test');
+                    console.log(this.store);
+                    // product id (in this case is 1001) will be stored in the cart array
+                    this.cart.push(this.product.id);
+                    this.$emit('addProduct', product)
+                },
+    },
+}
+</script>
